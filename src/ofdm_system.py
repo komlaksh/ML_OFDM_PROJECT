@@ -54,9 +54,13 @@ for snr in snrdb:
 
     ber.append(e/t)
 
-plt.semilogy(snrdb,ber,'o-')
+plt.figure(figsize=(8,5))
+plt.semilogy(snrdb,ber,'o-',linewidth=2)
 plt.xlabel("SNR (dB)")
-plt.ylabel("BER")
-plt.title("OFDM BER vs SNR")
-plt.grid()
+plt.ylabel("Bit Error Rate (BER)")
+plt.title("BER vs SNR for OFDM System")
+plt.grid(True)
+
+plt.savefig("../results/ber_vs_snr.png",dpi=300,bbox_inches="tight")
+
 plt.show()
