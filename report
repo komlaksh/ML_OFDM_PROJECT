@@ -1,0 +1,8 @@
+Accuracy Graph:
+
+The performance of different machine learning models is compared in terms of classification accuracy. The SVM model achieves the highest accuracy due to its ability to effectively separate complex decision boundaries.
+
+
+Confusion Matrix:
+
+The confusion matrix illustrates that most of the transmitted symbols are correctly classified by the machine learning model, with minimal classification errors under noisy channel conditions.
