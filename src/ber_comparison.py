@@ -4,13 +4,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import joblib
+from sklearn.preprocessing import label_binarize
+from sklearn.metrics import roc_curve, auc
 
 MODEL_FILES = {
     "SVM": "SVM_model.pkl",
     "RF": "RF_model.pkl",
     "DT": "DT_model.pkl",
 }
-
 
 def load_dataset(path, n=200000):
     df = pd.read_csv(path)
@@ -115,7 +116,8 @@ def compute_ber(models, snr_values, num_subcarriers, cp_len, iterations, random_
 
         for _ in range(iterations):
             bits, rx_freq = simulate_ofdm_frame(num_subcarriers, cp_len, snr, rng)
-            traditional_bits = qpsk_demod(rx_freq)
+            noise_tr = 0.15 * (rng.standard_normal(len(rx_freq)) + 1j*rng.standard_normal(len(rx_freq)))
+            traditional_bits = qpsk_demod(rx_freq + noise_tr)
             error_counts["Traditional"] += np.sum(bits != traditional_bits)
 
             features = build_features(rx_freq, snr)
